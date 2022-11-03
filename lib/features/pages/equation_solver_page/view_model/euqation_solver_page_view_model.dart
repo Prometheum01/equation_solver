@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:math_solver/core/constants/string_const.dart';
 import 'package:math_solver/core/extensions/double_extension.dart';
 
 import '../view/equation_solver_page_view.dart';
@@ -30,7 +31,6 @@ abstract class EquationSolverPageViewModel
   calculateX1(double a, double b, double c) {
     setState(() {
       firstValue = (-b + pow(findDelta(a, b, c), 1 / 2)) / (2 * a);
-      print(firstValue);
       firstValue = firstValue.shorted();
     });
   }
@@ -38,7 +38,6 @@ abstract class EquationSolverPageViewModel
   calculateX2(double a, double b, double c) {
     setState(() {
       secondValue = (-b - pow(findDelta(a, b, c), 1 / 2)) / (2 * a);
-      print(secondValue);
       secondValue = secondValue.shorted();
     });
   }
@@ -47,11 +46,11 @@ abstract class EquationSolverPageViewModel
     final delta = pow(b, 2) - (4 * a * c);
 
     if (delta > 0) {
-      deltaText = 'There are two real radixes due to Δ > 0';
+      deltaText = StringConst.deltaBigText;
     } else if (delta == 0) {
-      deltaText = 'There are same real radix due to Δ = 0';
+      deltaText = StringConst.deltaEqualText;
     } else {
-      deltaText = 'There is no real radix due to Δ < 0';
+      deltaText = StringConst.deltaSmallText;
     }
 
     return delta;
